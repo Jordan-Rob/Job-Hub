@@ -1,6 +1,6 @@
 const candidateRepository = require("../repositories/candidateRepository");
 
-export const upsertCandidate = async (req, res) => {
+const upsertCandidate = async (req, res) => {
   try {
     const { candidate, created } = await candidateRepository.upsertCandidate(
       req.body
@@ -11,7 +11,7 @@ export const upsertCandidate = async (req, res) => {
   }
 };
 
-export const getCandidateByEmail = async (req, res) => {
+const getCandidateByEmail = async (req, res) => {
   try {
     const candidate = await candidateRepository.getCandidateByEmail(
       req.params.email
@@ -24,3 +24,5 @@ export const getCandidateByEmail = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+module.exports = { upsertCandidate, getCandidateByEmail };
