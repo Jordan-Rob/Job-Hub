@@ -53,7 +53,6 @@ test("should get an existing candidate by email", async () => {
     "jordan@example.com"
   );
 
-  console.log(existingCandidate);
   expect(existingCandidate.firstName).toBe("Jordan");
   expect(existingCandidate.lastName).toBe("Rob");
 });
