@@ -22,7 +22,7 @@ const JobCandidate = sequelize.define(
       unique: true,
     },
     callTimeInterval: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     linkedInProfile: {
