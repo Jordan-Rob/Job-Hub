@@ -26,4 +26,4 @@ class CandidateRepository {
   }
 }
 
-module.exports = CandidateRepository;
+module.exports = new CandidateRepository();
