@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useMutation } from "react-query";
 import { upsertCandidate } from "../api/candidateAPI";
+import Notification from "./Notification";
 
 const Card = styled.div`
   background-color: #fff;
@@ -58,10 +59,17 @@ const AddCandidate = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [notification, setNotification] = useState({
+    visible: false,
+    message: "",
+  });
 
   const mutation = useMutation(upsertCandidate, {
     onSuccess: () => {
-      alert("Candidate submitted successfully");
+      setNotification({
+        visible: true,
+        message: "Candidate submitted successfully",
+      });
       setFormData({
         firstName: "",
         lastName: "",
@@ -86,6 +94,20 @@ const AddCandidate = () => {
     });
   };
 
+  const labelFormat = (field) => {
+    // Check if the field is camelCase by looking for uppercase letters
+    const isCamelCase = /[A-Z]/.test(field);
+
+    // If camelCase, split and capitalize each word
+    if (isCamelCase) {
+      const formattedField = field.replace(/([a-z])([A-Z])/g, "$1 $2");
+      return formattedField.charAt(0).toUpperCase() + formattedField.slice(1);
+    }
+
+    // Otherwise, just capitalize the first letter
+    return field.charAt(0).toUpperCase() + field.slice(1);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -93,9 +115,7 @@ const AddCandidate = () => {
     const requiredFields = ["firstName", "lastName", "email", "comment"];
     for (const field of requiredFields) {
       if (!formData[field]) {
-        newErrors[field] = `${
-          field.charAt(0).toUpperCase() + field.slice(1)
-        } is required`;
+        newErrors[field] = `${labelFormat(field)} is required`;
       }
     }
 
@@ -109,15 +129,21 @@ const AddCandidate = () => {
 
   return (
     <Card>
+      <Notification
+        message={notification.message}
+        visible={notification.visible}
+        onClose={() => setNotification({ ...notification, visible: false })}
+      />
       <form onSubmit={handleSubmit}>
         {["firstName", "lastName", "email", "comment"].map((field) => (
           <FormGroup key={field}>
-            <Label>{field.charAt(0).toUpperCase() + field.slice(1)}*</Label>
+            <Label htmlFor={field}>{labelFormat(field)}*</Label>
             <Input
               type={field === "email" ? "email" : "text"}
               name={field}
               value={formData[field]}
               onChange={handleChange}
+              id={field}
             />
             {errors[field] && <ErrorMessage>{errors[field]}</ErrorMessage>}
           </FormGroup>
@@ -129,12 +155,13 @@ const AddCandidate = () => {
           "githubProfile",
         ].map((field) => (
           <FormGroup key={field}>
-            <Label>{field.charAt(0).toUpperCase() + field.slice(1)}</Label>
+            <Label htmlFor={field}>{labelFormat(field)}</Label>
             <Input
               type="text"
               name={field}
               value={formData[field]}
               onChange={handleChange}
+              id={field}
             />
           </FormGroup>
         ))}
