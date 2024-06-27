@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import AddCandidate from "./components/AddCandidate";
-//import SearchCandidate from "./SearchCandidate";
+import SearchCandidate from "./components/SearchCandidate";
 
 const Navbar = styled.nav`
   background-color: #007bff;
@@ -44,7 +44,7 @@ const App = () => {
       <Heading>Job Candidate Hub</Heading>
       <Routes>
         <Route path="/" element={<AddCandidate />} />
-        <Route path="/search" element={""} />
+        <Route path="/search" element={<SearchCandidate />} />
       </Routes>
     </AppContainer>
   );
