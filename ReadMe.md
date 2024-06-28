@@ -14,6 +14,9 @@ Setup the project locally on your PC
 5. To view the API's docs type the following url into your browser\
 *http://localhost:3001/api-docs*
 
+You will see the web page below
+![API docs](https://res.cloudinary.com/dbureb5gj/image/upload/f_auto,q_auto/xnfh9nff4c1keoogz5hs)
+
 6. To run API tests run the following command:\
 `npm run test` \
 You will see the tests as well as the code coverage of the tests
@@ -25,6 +28,11 @@ it's dependencies\
 `npm start`
 9. To view the front end type the following url into your browser\
 *http://localhost:3000*
+
+You will see the web page shown below
+
+![Front end page](https://res.cloudinary.com/dbureb5gj/image/upload/f_auto,q_auto/jhkbx5hmiarxiuxjfi0g)
+
 10. To run the front end tests with code coverage, run the following command:\
 `npm test -- --coverage` \
 Initially one test or none  might be shown since the command prioritizes files that were changed in most recent commit so to run 
