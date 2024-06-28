@@ -89,17 +89,20 @@ const SearchCandidate = () => {
     <Card>
       <form onSubmit={handleSearch}>
         <FormGroup>
-          <Label>Search by Email*</Label>
+          <Label htmlFor="email">Search by Email*</Label>
           <Input
             type="email"
             value={searchEmail}
+            id="email"
             onChange={(e) => setSearchEmail(e.target.value)}
           />
           {searchTriggered && !searchEmail && (
             <ErrorMessage>Email is required</ErrorMessage>
           )}
         </FormGroup>
-        <Button type="submit">Search</Button>
+        <Button type="submit" name="search">
+          Search
+        </Button>
       </form>
 
       {searchTriggered && error && (
